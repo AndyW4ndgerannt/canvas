@@ -1,48 +1,42 @@
 <!DOCTYPE HTML>
-
 <html>
    <head>
-      
-      <style>
-         #test {
-            width:100px;
-            height:100px;
-            margin: 0px auto;
-         }
-      </style>
-      
-      <script type = "text/javascript">
-         function drawShape() {
+      <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+      <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
+      <script type="text/javascript" >
+         windows.onload = function () {
+         var dataPoint = [];
             
-            // get the canvas element using the DOM
-            var canvas = document.getElementById('mycanvas');
-            
-            // Make sure we don't execute when canvas isn't supported
-            if (canvas.getContext) {
-            
-               // use getContext to use the canvas for drawing
-               var ctx = canvas.getContext('2d');
-               
-               // create new image object to use as pattern
-               var img = new Image();
-               
-               img.src = 'img/external-content.duckduckgo.com.gif';
-               img.onload = function() {
-                  
-                  // create pattern
-                  var ptrn = ctx.createPattern(img,'repeat');
-                  ctx.fillStyle = ptrn;
-                  ctx.fillRect(0,0,150,150);
-               }
-            } else {
-               alert('You need Safari or Firefox 1.5+ to see this demo.');
+         var stockChart = new CanvasJS.StockChart("chartContainer",{
+         title: {
+            text: "StockChart Title"
+         },
+         charts: [{
+         data: [{
+            type: "line",//Change it to "spline","area","column"
+            dataPoints : dataPoints
+            }]
+         }],
+         navigator: {
+            slider: {
+            minimum: new Date(2018,04,01),
+            maximun: new Date(2022,03,25)
             }
          }
-      </script>
+         });
+            
+         $.getJSON("https://canvasjs.com/data/docs/btcusd2018.json",
+                  function(data) {
+         for(var i = 0; i < data.length; i++){
+         dataPoints.push({x: new Date(data[i].date, y:
+                                     Number(data[i].close)});
+         }
+                   stockChart.render();
+         });
+         }
+         </script>
    </head>
-    
-   <body id = "test" onload = "drawShape();">
-      <canvas id = "mycanvas"></canvas>
+   <body>
+      <div id="chartContainer" style="height: 400px; with 100%;"></div>
    </body>
-   
 </html>
