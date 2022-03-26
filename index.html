@@ -1,42 +1,48 @@
-<!DOCTYPE HTML>
-<html>
-   <head>
-      <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-      <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
-      <script type="text/javascript" >
-         windows.onload = function () {
-         var dataPoint = [];
-            
-         var stockChart = new CanvasJS.StockChart("chartContainer",{
-         title: {
-            text: "StockChart Title"
-         },
-         charts: [{
-         data: [{
-            type: "line",//Change it to "spline","area","column"
-            dataPoints : dataPoints
-            }]
-         }],
-         navigator: {
-            slider: {
-            minimum: new Date(2018,04,01),
-            maximun: new Date(2022,03,25)
-            }
-         }
-         });
-            
-         $.getJSON("https://canvasjs.com/data/docs/btcusd2018.json",
-                  function(data) {
-         for(var i = 0; i < data.length; i++){
-         dataPoints.push({x: new Date(data[i].date, y:
-                                     Number(data[i].close)});
-         }
-                   stockChart.render();
-         });
-         }
-         </script>
-   </head>
-   <body>
-      <div id="chartContainer" style="height: 400px; with 100%;"></div>
-   </body>
-</html>
+<!DOCTYPE HTML>  
+<html>  
+<head>    
+  <script type="text/javascript">  
+  window.onload = function () {  
+    var chart = new CanvasJS.Chart("chartContainer",  
+    {  
+       title:{  
+        text: "Golds won in 2012 London Olympics",   
+        fontWeight: "bolder",  
+        fontColor: "#008B8B",  
+        fontfamily: "tahoma",          
+        fontSize: 25,  
+        padding: 10          
+      },  
+  
+      data: [  
+      {          
+        type: "column",  
+        dataPoints: [  
+         {label: "US", y: 46 },  
+         {label: "China", y: 38},  
+         {label: "Britain", y: 29},  
+         {label: "Russia", y: 24 },  
+         {label: "South Korea", y: 13 },  
+         {label: "Germany", y: 11 },  
+         {label: "france", y: 11},  
+         {label: "Hungary", y: 8 },  
+         {label: "Australia", y: 7 },  
+         {label: "Japan", y: 7 }        
+      ]  
+    }  
+  
+      ]  
+    });  
+  
+    chart.render();  
+  }  
+  </script>  
+ <script type="text/javascript"   
+src="https://canvasjs.com/assets/script/canvasjs.min.js">  
+</script>  
+</head>  
+<body>  
+  <div id="chartContainer" style="height: 300px; width: 100%;">  
+  </div>  
+</body>  
+</html> 
